@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+  <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
+  <title>Question Details - Quiz App</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
+  <link th:href="@{/assets/css/nucleo-icons.css}" rel="stylesheet" />
+  <link th:href="@{/assets/css/nucleo-svg.css}" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link id="pagestyle" th:href="@{/assets/css/material-dashboard.css?v=3.2.0}" rel="stylesheet" />
+  <style>
+    .action-btn { 
+      margin-right: 8px; 
+      min-width: 100px; 
+      text-align: center;
+    }
+    .bg-single-choice { background: linear-gradient(90deg, #3498db, #2980b9); color: white; }
+    .bg-multiple-choice { background: linear-gradient(90deg, #9b59b6, #8e44ad); color: white; }
+    .bg-true-false { background: linear-gradient(90deg, #2ecc71, #27ae60); color: white; }
+    .disabled-btn {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .bg-draft { background: linear-gradient(90deg, #bdc3c7, #95a5a6); color: white; }
+    .bg-published { background: linear-gradient(90deg, #2ecc71, #27ae60); color: white; }
+    .bg-archived { background: linear-gradient(90deg, #e74c3c, #c0392b); color: white; }
+    .answer-correct { background: linear-gradient(90deg, #2ecc71, #27ae60); color: white; }
+    .answer-incorrect { background: linear-gradient(90deg, #bdc3c7, #95a5a6); color: white; }
+    .answer-badge {
+      display: block;
+      padding: 5px 10px;
+      margin: 2px 0;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      min-width: 200px;
+      max-width: 1000px;
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .answer-badge.selected {
+      border: 2px solid #e74c3c;
+    }
+    th {
+      text-align: center !important;
+    }
+    .card-header h6 {
+      text-align: center;
+    }
+    /* Định dạng hàng được chọn */
+    .question-row.selected {
+      background-color: #e8f0fe;
+    }
+    /* Đảm bảo các nút Add/Edit Question cách đều */
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2 bg-white my-2" id="sidenav-main">
+    <div class="sidenav-header">
+      <a class="navbar-brand px-4 py-3 m-0" th:href="@{/admin/dashboard}">
+        <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img" width="26" height="26" alt="main_logo">
+        <span class="ms-1 text-sm text-dark">Quiz Admin</span>
+      </a>
+    </div>
+    <hr class="horizontal dark mt-0 mb-2">
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-dark" th:href="@{/admin/dashboard}">
+            <i class="material-symbols-rounded opacity-5">dashboard</i>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" th:href="@{/admin/adminUser}">
+            <i class="material-symbols-rounded opacity-5">person</i>
+            <span class="nav-link-text ms-1">Users</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active bg-gradient-dark text-white" th:href="@{/admin/quizzes}">
+            <i class="material-symbols-rounded opacity-5">quiz</i>
+            <span class="nav-link-text ms-1">Quizzes</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" th:href="@{/admin/categories}">
+            <i class="material-symbols-rounded opacity-5">category</i>
+            <span class="nav-link-text ms-1">Categories</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" th:href="@{/admin/logout}">
+            <i class="material-symbols-rounded opacity-5">logout</i>
+            <span class="nav-link-text ms-1">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" th:href="@{/admin}">Admin</a></li>
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" th:href="@{/admin/quizzes}">Quizzes</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Question Details</li>
+          </ol>
+        </nav>
+      </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="ms-3">
+          <h3 class="mb-0 h4 font-weight-bolder">Question Details</h3>
+          <p class="mb-4">Details of questions and answers for quiz: <span th:text="${quiz.title ?: 'N/A'}">N/A</span></p>
+          <div class="action-buttons">
+            <a th:href="@{/admin/quizzes/QuestionDetails/add(quizzId=${quiz.quizzId})}" class="btn btn-primary">
+              <i class="material-symbols-rounded">add</i> Add Question
+            </a>
+            <a id="editQuestionBtn" class="btn btn-info disabled-btn" href="#">
+              <i class="material-symbols-rounded">edit</i> Edit Question
+            </a>
+          </div>
+        </div>
+
+        <!-- Thông tin Quiz -->
+        <div class="col-12 mb-4">
+          <div class="card">
+            <div class="card-header pb-0">
+              <h6>Quiz Information</h6>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <p><strong>Title:</strong> <span th:text="${quiz.title ?: 'N/A'}">N/A</span></p>
+                  <p><strong>Description:</strong> <span th:text="${quiz.description ?: 'N/A'}">N/A</span></p>
+                  <p><strong>Time Limit:</strong> <span th:text="${quiz.timeLimit != null ? quiz.timeLimit + ' minutes' : '0 minutes'}">0 minutes</span></p>
+                </div>
+                <div class="col-md-6">
+                  <p><strong>Total Score:</strong> <span th:text="${quiz.totalScore != null ? quiz.totalScore : 0}">0</span></p>
+                  <p><strong>Status:</strong> 
+                    <span class="badge badge-sm" 
+                          th:classappend="${quiz.status == 'DRAFT' ? 'bg-draft' : quiz.status == 'PUBLISHED' ? 'bg-published' : 'bg-archived'}"
+                          th:text="${quiz.status ?: 'N/A'}">N/A</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danh sách câu hỏi và đáp án -->
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header pb-0">
+              <h6>Questions and Answers</h6>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Question Text</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Score</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Answers</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="question : ${questions}" th:if="${questions != null and #lists.size(questions) > 0}"
+                        class="question-row" th:data-question-id="${question.questionId}">
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" th:text="${question.questionText ?: 'N/A'}">N/A</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm" 
+                              th:classappend="${question.questionType == 'SINGLE_CHOICE' ? 'bg-single-choice' : 
+                                               question.questionType == 'MULTIPLE_CHOICE' ? 'bg-multiple-choice' : 
+                                               question.questionType == 'TRUE_FALSE' ? 'bg-true-false' : ''}"
+                              th:text="${question.questionType ?: 'N/A'}">N/A</span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs font-weight-bold mb-0" th:text="${question.score != null ? question.score : 0}">0</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <div class="d-flex flex-column">
+                          <span th:each="answer : ${answers}" 
+                                th:if="${answer.questionId == question.questionId}">
+                            <span class="answer-badge" 
+                                  th:classappend="${answer.isCorrect ? 'answer-correct' : 'answer-incorrect'}"
+                                  th:data-answer-id="${answer.answerId}"
+                                  th:data-quizz-id="${quiz.quizzId}"
+                                  th:data-question-id="${question.questionId}"
+                                  th:text="${answer.answerText ?: 'N/A'}">N/A</span>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center">
+                        <a id="editAnswerBtn" th:id="'editAnswerBtn-' + ${question.questionId}" class="btn btn-sm btn-info action-btn disabled-btn">
+                          <i class="material-symbols-rounded">edit</i> Edit
+                        </a>
+                        <a th:href="@{/admin/dashboard/totalQuestions/addAnswer(questionId=${question.questionId})}" 
+                           th:classappend="${(question.questionType == 'SINGLE_CHOICE' or question.questionType == 'MULTIPLE_CHOICE') and answerCountMap[question.questionId] >= 4 ? 'btn btn-sm btn-primary action-btn disabled-btn' : 
+                                            question.questionType == 'TRUE_FALSE' and answerCountMap[question.questionId] >= 2 ? 'btn btn-sm btn-primary action-btn disabled-btn' : 'btn btn-sm btn-primary action-btn'}">
+                          <i class="material-symbols-rounded">add</i> Add Answer
+                        </a>
+                        <button class="btn btn-sm btn-danger action-btn delete-answer-btn" 
+                                th:id="'deleteAnswerBtn-' + ${question.questionId}" 
+                                disabled>
+                          <i class="material-symbols-rounded">delete</i> Delete
+                        </button>
+                      </td>
+                    </tr>
+                    <tr th:unless="${questions != null and #lists.size(questions) > 0}">
+                      <td colspan="5" class="text-center">No questions available for this quiz</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer py-4">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div class="copyright text-center text-sm text-muted text-lg-start">
+                © <script>document.write(new Date().getFullYear())</script>,
+                Quiz App Admin Panel
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script th:src="@{/assets/js/core/popper.min.js}"></script>
+  <script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+  <script th:src="@{/assets/js/plugins/perfect-scrollbar.min.js}"></script>
+  <script th:src="@{/assets/js/plugins/smooth-scrollbar.min.js}"></script>
+  <script th:src="@{/assets/js/material-dashboard.min.js?v=3.2.0}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const questionRows = document.querySelectorAll('.question-row');
+      const answerBadges = document.querySelectorAll('.answer-badge');
+      const editQuestionButton = document.getElementById('editQuestionBtn');
+
+      // Object để lưu đáp án được chọn cho từng câu hỏi
+      const selectedAnswers = {};
+
+      // Object để lưu câu hỏi được chọn
+      let selectedQuestion = null;
+
+      // Lấy questionId từ localStorage (nếu có)
+      const savedQuestionId = localStorage.getItem('selectedQuestionId');
+
+      // Thêm sự kiện click cho từng hàng câu hỏi
+      questionRows.forEach(row => {
+        const questionId = row.getAttribute('data-question-id');
+
+        // Nếu questionId khớp với giá trị trong localStorage, tự động chọn
+        if (savedQuestionId && questionId === savedQuestionId) {
+          row.classList.add('selected');
+          selectedQuestion = row;
+          editQuestionButton.classList.remove('disabled-btn');
+          editQuestionButton.setAttribute('href', '/admin/dashboard/totalQuestions/edit?questionId=' + questionId);
+        }
+
+        row.addEventListener('click', function () {
+          // Bỏ chọn hàng trước đó (nếu có)
+          if (selectedQuestion) {
+            selectedQuestion.classList.remove('selected');
+          }
+
+          // Chọn hàng mới
+          this.classList.add('selected');
+          selectedQuestion = this;
+
+          // Lưu questionId vào localStorage
+          const questionId = this.getAttribute('data-question-id');
+          localStorage.setItem('selectedQuestionId', questionId);
+
+          // Kích hoạt nút Edit Question và cập nhật href
+          editQuestionButton.classList.remove('disabled-btn');
+          editQuestionButton.setAttribute('href', '/admin/dashboard/totalQuestions/edit?questionId=' + questionId);
+        });
+      });
+
+      // Thêm sự kiện click cho từng đáp án
+      answerBadges.forEach(badge => {
+        badge.addEventListener('click', function (event) {
+          event.stopPropagation(); // Ngăn sự kiện click trên hàng câu hỏi bị kích hoạt
+          const questionId = this.getAttribute('data-question-id');
+          const answerId = this.getAttribute('data-answer-id');
+
+          // Bỏ chọn đáp án trước đó của câu hỏi này
+          if (selectedAnswers[questionId]) {
+            selectedAnswers[questionId].classList.remove('selected');
+          }
+
+          // Chọn đáp án mới
+          this.classList.add('selected');
+          selectedAnswers[questionId] = this;
+
+          // Kích hoạt nút Edit và Delete tương ứng với câu hỏi
+          const editButton = document.getElementById('editAnswerBtn-' + questionId);
+          const deleteButton = document.getElementById('deleteAnswerBtn-' + questionId);
+          if (editButton) {
+            editButton.disabled = false;
+            editButton.classList.remove('disabled-btn');
+            editButton.setAttribute('href', '/admin/dashboard/totalQuestions/editAnswer?answerId=' + answerId);
+          }
+          if (deleteButton) {
+            deleteButton.disabled = false;
+            deleteButton.classList.remove('disabled-btn');
+          }
+        });
+      });
+
+      // Thêm sự kiện click cho từng nút Delete
+      document.querySelectorAll('.delete-answer-btn').forEach(button => {
+        button.addEventListener('click', function (event) {
+          event.stopPropagation(); // Ngăn sự kiện click trên hàng câu hỏi bị kích hoạt
+          const questionId = this.id.split('-')[1];
+          const selectedAnswer = selectedAnswers[questionId];
+          
+          if (selectedAnswer) {
+            const answerId = selectedAnswer.getAttribute('data-answer-id');
+            const quizzId = selectedAnswer.getAttribute('data-quizz-id');
+
+            // Gửi yêu cầu xóa bằng AJAX
+            $.ajax({
+              url: '/admin/dashboard/totalQuestions/deleteAnswer',
+              type: 'POST',
+              data: {
+                answerId: answerId,
+                quizzId: quizzId
+              },
+              success: function () {
+                // Lưu questionId vào localStorage trước khi tải lại trang
+                localStorage.setItem('selectedQuestionId', questionId);
+                // Tải lại trang
+                window.location.href = '/admin/dashboard/totalQuestions/details?quizzId=' + quizzId;
+              },
+              error: function (xhr, status, error) {
+                console.error('Error deleting answer:', error);
+                alert('Failed to delete answer: ' + error);
+              }
+            });
+          }
+        });
+      });
+
+      // Ban đầu, vô hiệu hóa nút Edit Question nếu không có câu hỏi nào được chọn
+      if (!selectedQuestion) {
+        editQuestionButton.classList.add('disabled-btn');
+      }
+
+      // Ban đầu, vô hiệu hóa các nút Edit và Delete của từng câu hỏi nếu không có đáp án nào được chọn
+      document.querySelectorAll('.delete-answer-btn, .edit-answer-btn').forEach(button => {
+        const questionId = button.id.split('-')[1];
+        if (!selectedAnswers[questionId]) {
+          button.disabled = true;
+          button.classList.add('disabled-btn');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

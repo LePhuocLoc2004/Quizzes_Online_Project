@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{layout/user :: mainContent('Quiz List - Online Quiz', ~{:: #quiz-content})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz List - Online Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link th:href="@{/assets/user/css/style.css}" rel="stylesheet">
+</head>
+<body>
+    <div id="quiz-content">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="display-6 fw-bold text-primary">Quiz List</h2>
+                <p class="text-muted lead">Explore and challenge yourself with a variety of quizzes</p>
+            </div>
+
+            <div class="search-filter-section mb-5">
+                <form th:action="@{/answer/list}" method="get" class="row g-3 align-items-center">
+                    <!-- Search quiz input -->
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" id="searchKeyword" name="keyword" class="form-control" 
+                                   placeholder="Search for quizzes..." th:value="${keyword}">
+                            <button type="submit" class="btn btn-primary" id="searchButton">
+                                <i class="fas fa-search me-2"></i>Search
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <select class="form-select" id="categoryFilter" name="categoryId">
+                            <option value="">Select category</option>
+                            <option th:each="category : ${categories}" 
+                                    th:value="${category.categoryId}" 
+                                    th:text="${category.name}"
+                                    th:selected="${category.categoryId == param.categoryId}"></option>
+                        </select>
+                    </div>
+
+                    <!-- Filter by time -->
+                    <div class="col-md-3">
+                        <select class="form-select" id="timeFilter" name="fromDate">
+                            <option value="">All time</option>
+                            <option value="today" th:data-date="${todayDate}" th:selected="${fromDate == 'today'}">Today</option>
+                            <option value="week" th:data-date="${weekDate}" th:selected="${fromDate == 'week'}">This week</option>
+                            <option value="month" th:data-date="${monthDate}" th:selected="${fromDate == 'month'}">This month</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Quiz list in card format -->
+            <div class="row row-cols-1 row-cols-md-3 g-1">
+                <div class="col" th:each="quiz : ${quizzes}" th:if="${quiz != null and quiz.quizzId != null}">
+                    <div class="card h-100">
+                        <img th:src="@{${quiz.photo != null ? quiz.photo : '/uploads/default-quiz.jpg'}}" 
+                             class="card-img-top" alt="Quiz Banner">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-book me-2 text-primary"></i>
+                                <span th:text="${quiz.title} ?: 'No title'"></span>
+                            </h5>
+                            <p class="card-text text-muted">
+                                <i class="fas fa-clock me-1"></i>
+                                <span th:text="${quiz.timeLimit != null ? quiz.timeLimit + ' minutes' : 'N/A'}">N/A</span>
+                            </p>
+                            <p class="card-text">
+                                <span class="badge"
+                                      th:classappend="${quiz.status == 'Active' ? 'bg-success' : quiz.status == 'DRAFT' ? 'bg-secondary' : 'bg-warning'}"
+                                      th:text="${quiz.status == 'Active' ? 'Completed' : quiz.status == 'DRAFT' ? 'Not started' : 'In progress'}">
+                                </span>
+                            </p>
+                            <div class="d-flex justify-content-end">
+                                <a th:if="${quiz.status == 'DRAFT'}" 
+                                   th:href="@{/take-quiz/{quizzId}(quizzId=${quiz.quizzId})}" 
+                                   class="btn btn-primary">Start Quiz</a>
+                                <a th:if="${quiz.status == 'PUBLISHED'}" 
+                                   th:href="@{/take-quiz/{quizzId}(quizzId=${quiz.quizzId})}" 
+                                   class="btn btn-primary">Start Quiz</a>
+                                <a th:if="${quiz.status == 'PUBLISHED'}" 
+                                   th:href="@{/take-quiz/{quizzId}(quizzId=${quiz.quizzId})}" 
+                                   class="btn btn-primary ms-2">Continue</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Quiz navigation" class="mt-5" th:if="${totalPages > 1}">
+                <ul class="pagination justify-content-center pagination-rounded shadow-sm">
+                    <li class="page-item" th:class="${currentPage == 1} ? 'disabled' : ''">
+                        <a class="page-link" th:href="@{/answer/list(page=${currentPage - 1}, keyword=${keyword}, categoryId=${categoryId}, fromDate=${fromDate})}">
+                            <i class="fas fa-chevron-left me-1"></i>Previous
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="page : ${#numbers.sequence(1, totalPages)}" 
+                        th:class="${currentPage == page} ? 'active' : ''">
+                        <a class="page-link" th:href="@{/answer/list(page=${page}, keyword=${keyword}, categoryId=${categoryId}, fromDate=${fromDate})}" 
+                           th:text="${page}"></a>
+                    </li>
+                    <li class="page-item" th:class="${currentPage == totalPages} ? 'disabled' : ''">
+                        <a class="page-link" th:href="@{/answer/list(page=${currentPage + 1}, keyword=${keyword}, categoryId=${categoryId}, fromDate=${fromDate})}">
+                            Next<i class="fas fa-chevron-right ms-1"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("timeFilter").addEventListener("change", function() {
+            let selectedOption = this.options[this.selectedIndex];
+            let fromDate = selectedOption.value; // Use the option's value (today, week, month)
+            let form = document.querySelector("form");
+            form.submit(); // Submit the form directly with the fromDate value
+        });
+
+        document.getElementById("searchButton").addEventListener("click", function(e) {
+            e.preventDefault();
+            document.querySelector("form").submit();
+        });
+    </script>
+</body>
+</html>

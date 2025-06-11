@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Question and Answers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <h1>Add Question</h1>
+
+    <div th:if="${success}" class="message success" th:text="${success}"></div>
+    <div th:if="${error}" class="message error" th:text="${error}"></div>
+
+    <form th:action="@{/quiz/questions/{quizzId}/add(quizzId=${quizzId})}" 
+          th:object="${questionWithAnswers}" 
+          method="post" id="questionForm">
+        <input type="hidden" th:field="*{quizzId}" th:value="${quizzId}"/>
+        <input type="hidden" th:field="*{orderIndex}" th:value="${questionWithAnswers.orderIndex}"/>
+
+        <div class="form-group">
+            <label for="questionText">Question (Order: <span th:text="${questionWithAnswers.orderIndex}"></span>):</label>
+            <textarea id="questionText" th:field="*{questionText}" rows="3" placeholder="Enter question content" required class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="questionType">Question Type:</label>
+            <select id="questionType" th:field="*{questionType}" onchange="toggleAddButton()" required class="form-control">
+                <option value="TRUE_FALSE">True/False (TRUE_FALSE)</option>
+                <option value="SINGLE_CHOICE">Single Choice (SINGLE_CHOICE)</option>
+                <option value="MULTIPLE_CHOICE">Multiple Choice (MULTIPLE_CHOICE)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="score">Score:</label>
+            <input type="number" id="score" th:field="*{score}" min="1" value="10" required class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label>Answers:</label>
+            <div id="answersContainer">
+                <div class="answer-row" th:each="answer, iter : *{answers}">
+                    <span class="order-display" th:text="${iter.count}"></span>
+                    <input type="text" th:field="*{answers[__${iter.index}__].answerText}" 
+                           th:placeholder="'Answer ' + ${iter.count}" required class="form-control" style="flex: 1;"/>
+                    <div class="checkbox-container">
+                        <input type="checkbox" th:field="*{answers[__${iter.index}__].isCorrect}" 
+                               th:value="true" class="form-check-input answer-checkbox"/>
+                        <label class="form-check-label">✓</label>
+                    </div>
+                    <input type="hidden" th:field="*{answers[__${iter.index}__].orderIndex}" 
+                           th:value="${iter.count}"/>
+                </div>
+            </div>
+            <button type="button" id="addAnswerBtn" class="add-answer-btn" onclick="addRemainingAnswerFields()">+</button>
+        </div>
+
+        <button type="submit" class="btn-submit">Add</button>
+    </form>
+</div>
+
+<script>
+    function addRemainingAnswerFields() {
+        const container = document.getElementById('answersContainer');
+        const currentCount = container.getElementsByClassName('answer-row').length;
+        const questionType = document.getElementById('questionType').value;
+
+        if (questionType === 'TRUE_FALSE' && currentCount >= 2) {
+            alert("TRUE_FALSE allows a maximum of 2 answers!");
+            return;
+        } else if (currentCount >= 4) {
+            alert("Maximum of 4 answers!");
+            return;
+        }
+
+        const maxAnswers = questionType === 'TRUE_FALSE' ? 2 : 4;
+        const remaining = maxAnswers - currentCount;
+
+        for (let i = 0; i < remaining; i++) {
+            const newIndex = currentCount + i;
+            const newAnswer = document.createElement('div');
+            newAnswer.className = 'answer-row';
+            newAnswer.innerHTML = `
+                <span class="order-display">${newIndex + 1}</span>
+                <input type="text" name="answers[${newIndex}].answerText" placeholder="Answer ${newIndex + 1}" required class="form-control" style="flex: 1;"/>
+                <div class="checkbox-container">
+                    <input type="checkbox" name="answers[${newIndex}].isCorrect" value="true" class="form-check-input answer-checkbox"/>
+                    <label class="form-check-label">✓</label>
+                </div>
+                <input type="hidden" name="answers[${newIndex}].orderIndex" value="${newIndex + 1}"/>
+            `;
+            container.appendChild(newAnswer);
+        }
+
+        document.getElementById('addAnswerBtn').style.display = 'none';
+        updateCheckboxBehavior();
+    }
+
+    function updateCheckboxBehavior() {
+        const questionType = document.getElementById('questionType').value;
+        const checkboxes = document.getElementsByClassName('answer-checkbox');
+
+        if (questionType === 'TRUE_FALSE' || questionType === 'SINGLE_CHOICE') {
+            // Allow only one checkbox to be selected for TRUE_FALSE and SINGLE_CHOICE
+            for (let checkbox of checkboxes) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        for (let otherCheckbox of checkboxes) {
+                            if (otherCheckbox !== this) {
+                                otherCheckbox.checked = false;
+                            }
+                        }
+                    }
+                });
+            }
+        } else if (questionType === 'MULTIPLE_CHOICE') {
+            // Allow multiple checkbox selections for MULTIPLE_CHOICE, no limit
+            for (let checkbox of checkboxes) {
+                checkbox.removeEventListener('change', enforceSingleSelection);
+            }
+            // Ensure no event listener restricts multiple selections
+            const existingListeners = checkbox._eventListeners || {};
+            if (existingListeners['change']) {
+                for (let listener of existingListeners['change']) {
+                    checkbox.removeEventListener('change', listener);
+                }
+            }
+        }
+    }
+
+    function enforceSingleSelection() {
+        const checkboxes = document.getElementsByClassName('answer-checkbox');
+        if (this.checked) {
+            for (let otherCheckbox of checkboxes) {
+                if (otherCheckbox !== this) {
+                    otherCheckbox.checked = false;
+                }
+            }
+        }
+    }
+
+    function toggleAddButton() {
+        const questionType = document.getElementById('questionType').value;
+        const addBtn = document.getElementById('addAnswerBtn');
+        const currentCount = document.getElementsByClassName('answer-row').length;
+
+        if (questionType === 'TRUE_FALSE') {
+            addBtn.style.display = currentCount < 2 ? 'block' : 'none';
+        } else {
+            addBtn.style.display = currentCount < 4 ? 'block' : 'none';
+        }
+        updateCheckboxBehavior();
+    }
+
+    // Call on page load to check and display the "+" button
+    window.onload = function() {
+        const addBtn = document.getElementById('addAnswerBtn');
+        if (!addBtn) {
+            console.error('Button with id "addAnswerBtn" not found in DOM');
+        }
+        toggleAddButton();
+    };
+</script>
+
+<style>
+    .message.success {
+        background-color: #dff0d8;
+        color: #3c763d;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+    .message.error {
+        background-color: #f2dede;
+        color: #a94442;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .answer-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    .order-display {
+        min-width: 30px;
+        text-align: center;
+        font-weight: bold;
+    }
+    .checkbox-container {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .form-check-label {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+    .add-answer-btn {
+        margin-top: 10px;
+    }
+    .btn-submit {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .btn-submit:hover {
+        background-color: #0056b3;
+    }
+</style>
+</body>
+</html>

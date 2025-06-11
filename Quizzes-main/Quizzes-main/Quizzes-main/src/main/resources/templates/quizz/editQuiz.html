@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{layout/user :: mainContent('Edit Quiz', ~{this :: .form-container})}">
+<head>
+    <title>Edit Quiz</title>
+</head>
+<body>
+<div class="form-container">
+    <h1>Edit Quiz</h1>
+
+    <!-- Success or error messages -->
+    <div th:if="${success}" class="message success" th:text="${success}"></div>
+    <div th:if="${error}" class="message error" th:text="${error}"></div>
+
+    <form th:action="@{/quiz/update/{id}(id=${quizId})}" th:object="${quizDTO}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="quizId" th:value="${quizId}" />
+
+        <div class="form-group">
+            <label for="categoryId">Category:</label>
+            <select id="categoryId" th:field="*{categoryId}" required>
+                <option value="">Select category</option>
+                <option th:each="category : ${categories}"
+                        th:value="${category.categoryId}"
+                        th:text="${category.name}">
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Current Image:</label>
+            <div th:if="${quizDTO.photo}">
+                <img th:src="@{${quizDTO.photo}}" alt="Quiz Image" width="150px"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="photoFile">Select new image (if you want to change):</label>
+            <input type="file" id="photoFile" th:field="*{photoFile}" accept="image/*"/>
+        </div>
+
+        <div class="form-group">
+            <label for="timeLimit">Time Limit (minutes):</label>
+            <input type="number" id="timeLimit" th:field="*{timeLimit}" min="1" required/>
+        </div>
+
+        <button type="submit">Update Quiz</button>
+    </form>
+</div>
+</body>
+</html>

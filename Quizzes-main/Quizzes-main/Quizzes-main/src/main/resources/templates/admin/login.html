@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#1885ed">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/assets/css/style.css}">
+	<title>Admin Login</title>
+</head>
+
+<body>
+	<!-- Ring div starts here -->
+	<div class="ring">
+		<i style="--clr:#00ff0a;"></i>
+		<i style="--clr:#ff0057;"></i>
+		<i style="--clr:#fffd44;"></i>
+		<div class="login">
+			<h2>Admin Login</h2>
+
+			<!-- Thông báo lỗi hoặc logout từ Thymeleaf -->
+			<div th:if="${param.error}" style="color: red">Invalid username/password.</div>
+			<div th:if="${param.logout}" style="color: green">You have been logged out.</div>
+			<div th:if="${msg}" th:text="${msg}"></div>
+
+			<!-- Form login với Thymeleaf -->
+			<form method="post" th:action="@{/admin/process-login}">
+				<div class="inputBx">
+					<input type="text" name="usernameOrEmail" placeholder="Username or Email" required />
+				</div>
+				<div class="inputBx">
+					<input type="password" name="password" placeholder="Password" required />
+				</div>
+				<div class="inputBx">
+					<input type="submit" value="Sign in" />
+				</div>
+			</form>
+
+			<!-- Links giữ nguyên từ form đầu -->
+			<div class="links">
+				<a href="#">Forget Password</a>
+			</div>
+		</div>
+	</div>
+	<!-- Ring div ends here -->
+</body>

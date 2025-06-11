@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{layout/user :: mainContent('Ranking', ~{:: .content})}">
+<head>
+    <title>Ranking - Quiz Online</title>
+</head>
+<body>
+	<!-- Lấy ID người dùng đăng nhập -->
+	<input type="hidden" id="currentUserId" th:value="${currentUserId}" />
+    <div class="content">
+        <!-- Banner Section -->
+        <div class="container my-5">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold">Ranking</h2>
+                <p class="text-muted">Top rank</p>
+            </div>
+
+			<!-- Filter Options -->
+			<div class="filter-section mb-5">
+			    <div class="row g-3">
+			        <div class="col-md-4">
+			            <label class="form-label">Select Time Range</label>
+			            <select class="form-select" id="timeFilter">
+			                <option value="/ranking/index" th:selected="${selectedTimeFilter == 'all'}">All Time</option>
+			                <option value="/ranking/week" th:selected="${selectedTimeFilter == 'week'}">This Week</option>
+			                <option value="/ranking/month" th:selected="${selectedTimeFilter == 'month'}">This Month</option>
+			            </select>
+			        </div>
+			        <div class="col-md-4 d-flex align-items-end">
+			            <button class="btn btn-primary" id="filterBtn">Filter</button>
+			        </div>
+			    </div>
+			</div>
+			<!-- Script để chuyển hướng khi nhấn Filter -->
+				<script>
+				    document.getElementById("filterBtn").addEventListener("click", function () {
+				        let selectedFilter = document.getElementById("timeFilter").value;
+				        window.location.href = selectedFilter; // Chuyển hướng đến đường dẫn được chọn
+				    });
+				</script>
+            <!-- Top 3 Người Đứng Đầu -->
+            <div class="row mb-5 justify-content-center">
+				<!-- Top 2 -->
+				<div class="col-md-4 d-flex align-items-end">
+				    <div class="leaderboard-card silver w-100"
+				         th:classappend="${top2 != null and top2.userId == currentUserId} ? 'highlight-user'">
+				        <div class="position">2</div>
+				        <img th:if="${top2 != null}" th:src="@{'/assets/img/' + ${top2.profileImage}}" class="avatar" alt="Second Place" />
+				        <h5 th:text="${top2 != null ? top2.username : 'N/A'}"></h5>
+				        <p th:text="${top2 != null ? top2.totalScore : '0'}"></p>
+				        <i class="fas fa-medal medal-silver"></i>
+				    </div>
+				</div>
+
+				<!-- Top 1 -->
+				<div class="col-md-4">
+				    <div class="leaderboard-card gold"
+				         th:classappend="${top1 != null and top1.userId == currentUserId} ? 'highlight-user'">
+				        <div class="position">1</div>
+				        <img th:if="${top1 != null}" th:src="@{'/assets/img/' + ${top1.profileImage}}" class="avatar" alt="First Place" />
+				        <h5 th:text="${top1 != null ? top1.username : 'N/A'}"></h5>
+				        <p th:text="${top1 != null ? top1.totalScore : '0'}"></p>
+				        <i class="fas fa-crown medal-gold"></i>
+				    </div>
+				</div>
+
+				<!-- Top 3 -->
+				<div class="col-md-4 d-flex align-items-end">
+				    <div class="leaderboard-card bronze w-100"
+				         th:classappend="${top3 != null and top3.userId == currentUserId} ? 'highlight-user'">
+				        <div class="position">3</div>
+				        <img th:if="${top3 != null}" th:src="@{'/assets/img/' + ${top3.profileImage}}" class="avatar" alt="Third Place" />
+				        <h5 th:text="${top3 != null ? top3.username : 'N/A'}"></h5>
+				        <p th:text="${top3 != null ? top3.totalScore : '0'}"></p>
+				        <i class="fas fa-medal medal-bronze"></i>
+				    </div>
+				</div>
+            </div> 
+			<!-- Bảng Xếp Hạng -->
+			<div class="container">
+			    <h3 class="text-center my-4">List</h3>
+			    <div class="table-responsive">
+			        <table class="table table-striped table-hover">
+			            <thead class="table-dark">
+			                <tr>
+			                  
+			                    <th>Photo</th>
+			                    <th>Name</th>
+			                    <th>Aver</th>
+			                    <th>Quizz Complete</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                <!-- Lặp qua tất cả người dùng -->
+			                <tr th:each="ranking : ${rankings}"
+			                    th:classappend="${ranking.userId == currentUserId} ? 'table-warning'">
+			                   
+			                    <td>
+			                        <img th:if="${ranking.profileImage != null}" 
+			                             th:src="@{'/assets/img/' + ${ranking.profileImage}}" 
+			                             class="avatar" alt="User Image" width="40" align="left"/>
+			                    </td>
+			                    <td th:text="${ranking.username}"></td>
+			                    <td th:text="${ranking.totalScore}"></td>
+			                    <td th:text="${ranking.quizzesCompleted}"></td>
+			                </tr>
+			            </tbody>
+			        </table>
+			    </div>
+				<!-- Nút điều hướng phân trang -->
+				    <div class="text-center mt-3">
+				        <button class="btn btn-secondary" id="prevPage" disabled>Previous</button>
+				        <span id="pageIndicator">Page 1</span>
+				        <button class="btn btn-secondary" id="nextPage">Next</button>
+				    </div>
+				</div>
+
+				<script>
+				    document.addEventListener("DOMContentLoaded", function () {
+				        const rankings = /*[[${rankings}]]*/ [];
+				        const currentUserId = document.getElementById("currentUserId").value;
+				        let currentPage = 1;
+				        const pageSize = 6;
+
+				        function renderTable() {
+				            const start = (currentPage - 1) * pageSize;
+				            const end = start + pageSize;
+				            const visibleRankings = rankings.slice(start, end);
+
+				            const tableBody = document.getElementById("rankingTableBody");
+				            tableBody.innerHTML = "";
+
+				            visibleRankings.forEach(ranking => {
+				                const row = document.createElement("tr");
+				                if (ranking.userId == currentUserId) {
+				                    row.classList.add("table-warning");
+				                }
+
+				                row.innerHTML = `
+				                    <td>
+				                        <img src="/assets/img/${ranking.profileImage}" class="avatar" alt="User Image" width="40" align="left"/>
+				                    </td>
+				                    <td>${ranking.username}</td>
+				                    <td>${ranking.totalScore}</td>
+				                    <td>${ranking.quizzesCompleted}</td>
+				                `;
+				                tableBody.appendChild(row);
+				            });
+
+				            document.getElementById("pageIndicator").innerText = `Page ${currentPage}`;
+				            document.getElementById("prevPage").disabled = currentPage === 1;
+				            document.getElementById("nextPage").disabled = end >= rankings.length;
+				        }
+
+				        document.getElementById("prevPage").addEventListener("click", function () {
+				            if (currentPage > 1) {
+				                currentPage--;
+				                renderTable();
+				            }
+				        });
+
+				        document.getElementById("nextPage").addEventListener("click", function () {
+				            if (currentPage * pageSize < rankings.length) {
+				                currentPage++;
+				                renderTable();
+				            }
+				        });
+
+				        renderTable();
+				    });
+				</script>
+			</div>
+        </div>
+    </div>
+</body>
+
+</html>

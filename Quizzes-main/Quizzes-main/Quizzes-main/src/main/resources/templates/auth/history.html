@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{layout/user :: mainContent('Lịch sử thi', ~{:: .content})}">
+<head>
+    <title>Lịch sử thi - Quiz Online</title>
+</head>
+<body>
+	<input type="hidden" th:value="${userId}" id="userId" />
+    <div class="content">
+        <div class="container my-5">
+            <h2 class="mb-4"><i class="fas fa-history me-2"></i> Lịch sử thi</h2>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                          <th><i class="fas fa-calendar-alt me-2"></i> Ngày thi</th>
+                          <th><i class="fas fa-book me-2"></i> Bài thi</th>
+                          <th><i class="fas fa-user me-2"></i> Người thi</th>
+                          <th><i class="fas fa-star me-2"></i> Điểm số</th>
+                          <th><i class="fas fa-clock me-2"></i> Thời gian làm</th>
+                          <th><i class="fas fa-info-circle me-2"></i> Trạng thái</th>
+                          <th><i class="fas fa-cogs me-2"></i> Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="attempt : ${historyList}" class="align-middle">
+                            <td th:text="${#dates.format(attempt.startTime, 'yyyy-MM-dd HH:mm')}"></td>
+                            <td th:text="${attempt.quizzId}"></td>
+                            <td th:text="${attempt.username}"></td>
+                            <td>
+                                <span th:text="${attempt.score} + ' điểm'" 
+                                      th:classappend="${attempt.score >= 50} ? 'badge bg-success' : 'badge bg-danger'">
+                                </span>
+                            </td>
+                            <td th:text="${attempt.durationMinutes != null ? attempt.durationMinutes + ' phút' : 'N/A'}"></td>
+                            <td>
+                                <span th:text="${attempt.status}" 
+                                      th:classappend="${attempt.status == 'COMPLETED'} ? 'badge bg-success' : 'badge bg-warning'">
+                                </span>
+                            </td>
+                            <td>
+								<a th:href="@{/history/result/{attemptId}(attemptId=${attempt.attemptId})}" 
+								   class="btn btn-sm btn-primary">
+								    <i class="fas fa-eye me-1"></i> Chi tiết
+								</a>
+                            </td>
+                        </tr>
+                        <tr th:if="${historyList.isEmpty()}">
+                            <td colspan="7" class="text-center">Không có lịch sử thi nào</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

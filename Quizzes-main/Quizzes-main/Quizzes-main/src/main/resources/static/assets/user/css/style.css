@@ -1,0 +1,950 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background-color: #343a40;
+}
+
+.feature-box {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+}
+
+.quiz-category {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.quiz-category:hover {
+    transform: translateY(-5px);
+}
+
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.form-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+	display: block; /* Đảm bảo nút hiển thị như một block để căn giữa */
+	margin: 0 auto; /* Căn giữa nút */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+h1 {
+    text-align: center;
+	
+}
+
+
+.card {
+          border: none;
+          border-radius: 15px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          transition: transform 0.2s;
+          height: 100%; /* Đảm bảo card đồng đều chiều cao */
+          width: 100%; /* Đảm bảo card không vượt quá chiều rộng của cột */
+          overflow: hidden; /* Đảm bảo nội dung không tràn ra ngoài */
+      }
+      .card:hover {
+          transform: translateY(-5px);
+      }
+      .card-img-top {
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
+          height: 200px; /* Hình ảnh banner lớn */
+          object-fit: cover;
+          width: 100%;
+      }
+      .card-title {
+          font-size: 1.2rem; /* Tăng kích thước tiêu đề để nổi bật */
+          font-weight: bold;
+          color: #333;
+          margin-top: 10px;
+          margin-bottom: 5px;
+      }
+      .card-text-muted {
+          color: #666;
+          font-size: 0.9rem;
+          margin-bottom: 5px;
+      }
+      .status-badge {
+          font-size: 0.8rem;
+          padding: 5px 10px;
+          border-radius: 20px;
+          display: inline-block;
+      }
+      .btn-primary {
+          background: #007bff;
+          border: none;
+          border-radius: 5px;
+          padding: 8px 16px;
+          font-size: 0.9rem;
+          margin-right: 10px; /* Khoảng cách giữa các nút */
+      }
+      .btn-primary:hover {
+          background: #0056b3;
+      }
+      .search-filter-section .form-control, .search-filter-section .form-select {
+          border-radius: 8px;
+          border: 1px solid #ced4da;
+      }
+      .search-filter-section .btn-primary {
+          border-radius: 8px;
+      }
+      .row-cols-3 > .col {
+          flex: 0 0 33.333333%; /* Đảm bảo 3 cột, mỗi cột 33.33% */
+          max-width: 33.333333%;
+          padding: 0 10px; /* Khoảng cách giữa các card */
+      }
+      .container {
+          max-width: 1200px; /* Tăng chiều rộng container để hiển thị 3 card/hàng */
+      }
+      /* Responsive design */
+      @media (max-width: 1200px) {
+          .row-cols-3 > .col {
+              flex: 0 0 50%; /* Trên màn hình tablet lớn (≤1200px), hiển thị 2 cột */
+              max-width: 50%;
+          }
+          .card-img-top {
+              height: 180px; /* Giảm chiều cao hình ảnh trên tablet */
+          }
+      }
+      @media (max-width: 768px) {
+          .row-cols-3 > .col {
+              flex: 0 0 100%; /* Trên màn hình nhỏ (≤768px), hiển thị 1 cột */
+              max-width: 100%;
+          }
+          .card-img-top {
+              height: 150px; /* Giảm chiều cao hình ảnh trên mobile */
+          }
+          .card-title {
+              font-size: 1.0rem; /* Giảm kích thước tiêu đề trên mobile */
+          }
+          .card-text-muted {
+              font-size: 0.8rem; /* Giảm kích thước chữ trên mobile */
+          }
+          .btn-primary {
+              padding: 6px 12px; /* Giảm kích thước nút trên mobile */
+              font-size: 0.8rem;
+              margin-right: 5px;
+          }
+      }
+	  
+	  #quiz-content .container {
+	             width: 80%;
+	             margin: 20px auto;
+	             padding: 20px;
+	             border: 1px solid #ddd;
+	             border-radius: 8px;
+	             background-color: #f9f9f9;
+	         }
+	         .text-center.mb-5 h2 {
+	             text-align: center;
+	             margin-bottom: 20px;
+	             font-size: 2em;
+	             font-weight: bold;
+	             color: #007bff;
+	         }
+	         .text-center.mb-5 p {
+	             text-align: center;
+	             color: #6c757d;
+	             font-size: 1.1em;
+	         }
+	         .row-cols-1.row-cols-md-3 {
+	             display: flex;
+	             flex-wrap: wrap;
+	             margin: -10px;
+	         }
+	         .question-card {
+	             border: 1px solid #ccc;
+	             border-radius: 5px;
+	             padding: 15px;
+	             margin: 10px;
+	             background-color: #fff;
+	             flex: 0 0 calc(33.33% - 20px); /* 3 card mỗi hàng, trừ margin */
+	             max-width: calc(33.33% - 20px);
+	             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	         }
+	         .card-title {
+	             font-weight: bold;
+	             font-size: 1.2em;
+	             margin-bottom: 10px;
+	             color: #333;
+	         }
+	         .card-text {
+	             margin-bottom: 5px;
+	             color: #555;
+	         }
+	         .question-type, .score {
+	             font-style: italic;
+	             color: #777;
+	         }
+	         .answers-list {
+	             margin-top: 10px;
+	             padding-left: 15px;
+	             max-height: 150px;
+	             overflow-y: auto;
+	         }
+	         .answer-item {
+	             margin: 5px 0;
+	         }
+	         .correct {
+	             color: #28a745;
+	             font-weight: bold;
+	         }
+	         .incorrect {
+	             color: #dc3545;
+	         }
+	         .btn-group {
+	             margin-top: 15px;
+	         }
+	         .btn-action {
+	             margin-right: 5px;
+	             padding: 5px 10px;
+	         }
+	         .btn-delete {
+	             background-color: #dc3545;
+	             color: white;
+	         }
+	         .btn-delete:hover {
+	             background-color: #c82333;
+	             color: white;
+	         }
+	         .btn-edit {
+	             background-color: #007bff;
+	             color: white;
+	         }
+	         .btn-edit:hover {
+	             background-color: #0056b3;
+	             color: white;
+	         }
+	         .btn-add {
+	             display: block;
+	             width: 200px;
+	             margin: 20px auto;
+	             padding: 10px;
+	             background-color: #4CAF50;
+	             color: white;
+	             text-align: center;
+	             text-decoration: none;
+	             border-radius: 5px;
+	         }
+	         .btn-add:hover {
+	             background-color: #45a049;
+	             color: white;
+	         }
+	         .no-questions {
+	             text-align: center;
+	             color: #777;
+	             font-style: italic;
+	         }
+	         @media (max-width: 768px) {
+	             .question-card {
+	                 flex: 0 0 100%;
+	                 max-width: 100%;
+	             }
+	         }
+			 
+			 .highlight-user {
+			       border: 3px solid rgb(0, 0, 0) !important; /* Viền màu vàng */
+			       box-shadow: 0px 0px 15px rgba(255, 193, 7, 0.6); /* Hiệu ứng phát sáng */
+			   }
+
+			   /* Nếu user nằm trong bảng ranking */
+			   .table-warning {
+			       background-color: rgb(255, 0, 0) !important; /* Màu nền vàng nhạt */
+			       font-weight: bold;
+			   }
+	  
+			 #quiz-content .container {
+			             width: 80%;
+			             margin: 20px auto;
+			             padding: 20px;
+			             border: 1px solid #ddd;
+			             border-radius: 8px;
+			             background-color: #f9f9f9;
+			         }
+			         .text-center.mb-5 h2 {
+			             text-align: center;
+			             margin-bottom: 10px;
+			             font-size: 2em;
+			             font-weight: bold;
+			             color: #007bff;
+			         }
+			         .text-center.mb-5 p {
+			             text-align: center;
+			             color: #6c757d;
+			             font-size: 1.1em;
+			             margin-bottom: 20px;
+			         }
+			         .row-cols-1.row-cols-md-2 {
+			             display: flex;
+			             flex-wrap: wrap;
+			             margin: -10px;
+			         }
+			         .question-card {
+			             border: 1px solid #ccc;
+			             border-radius: 8px;
+			             padding: 20px; /* Tăng padding để card lớn hơn */
+			             margin: 10px;
+			             background-color: #fff;
+			             flex: 0 0 50%; /* 2 card mỗi hàng, chiếm 50% mỗi card */
+			             max-width: 50%;
+			             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tăng shadow để card nổi bật hơn */
+			             min-height: 400px; /* Đảm bảo chiều cao tối thiểu để card đồng đều và lớn hơn */
+			             display: flex;
+			             flex-direction: column;
+			         }
+			         .question-card .card-body {
+			             flex-grow: 1;
+			             display: flex;
+			             flex-direction: column;
+			             justify-content: space-between;
+			         }
+			         .card-title {
+			             font-weight: bold;
+			             font-size: 1.3em; /* Tăng kích thước font để card lớn hơn */
+			             margin-bottom: 15px; /* Tăng margin để trông chuyên nghiệp hơn */
+			             color: #333;
+			             display: flex;
+			             align-items: center;
+			         }
+			         .card-icon {
+			             font-size: 1.7em; /* Tăng kích thước icon để phù hợp với card lớn hơn */
+			             color: #007bff;
+			             margin-right: 15px; /* Tăng margin để cân đối */
+			         }
+			         .card-text {
+			             margin-bottom: 10px; /* Tăng margin để trông gọn gàng hơn */
+			             color: #555;
+			         }
+			         .question-type, .score {
+			             font-style: italic;
+			             color: #777;
+			             font-size: 1.1em; /* Tăng kích thước font để phù hợp với card lớn hơn */
+			         }
+			         .answers-list {
+			             margin-top: 15px; /* Tăng margin để trông đẹp hơn */
+			             padding-left: 20px;
+			             max-height: 150px;
+			             overflow-y: auto;
+			             flex-grow: 1;
+			         }
+			         .answer-item {
+			             margin: 8px 0; /* Tăng margin để trông gọn gàng hơn */
+			         }
+			         .correct {
+			             color: #28a745;
+			             font-weight: bold;
+			         }
+			         .incorrect {
+			             color: #dc3545;
+			         }
+			         .btn-group {
+			             margin-top: 20px; /* Tăng margin để trông chuyên nghiệp hơn */
+			             display: flex;
+			             gap: 10px; /* Tăng khoảng cách giữa các nút */
+			         }
+			         .btn-action {
+			             padding: 8px 20px; /* Tăng padding để nút lớn hơn */
+			             border-radius: 20px; /* Viền tròn hơn */
+			             font-size: 1em; /* Tăng kích thước font để phù hợp với card lớn hơn */
+			         }
+			         .btn-delete {
+			             background-color: #dc3545;
+			             color: white;
+			         }
+			         .btn-delete:hover {
+			             background-color: #c82333;
+			             color: white;
+			         }
+			         .btn-edit {
+			             background-color: #007bff;
+			             color: white;
+			         }
+			         .btn-edit:hover {
+			             background-color: #0056b3;
+			             color: white;
+			         }
+			         .btn-add {
+			             display: block;
+			             width: 250px; /* Tăng kích thước nút để phù hợp với card lớn hơn */
+			             margin: 20px auto;
+			             padding: 12px; /* Tăng padding để nút lớn hơn */
+			             background-color: #4CAF50;
+			             color: white;
+			             text-align: center;
+			             text-decoration: none;
+			             border-radius: 5px;
+			             font-size: 1.1em;
+			         }
+			         .btn-add:hover {
+			             background-color: #45a049;
+			             color: white;
+			         }
+			         .no-questions {
+			             text-align: center;
+			             color: #777;
+			             font-style: italic;
+			             font-size: 1.2em; /* Tăng kích thước font để phù hợp với card lớn hơn */
+			         }
+			         @media (max-width: 768px) {
+			             .question-card {
+			                 flex: 0 0 100%;
+			                 max-width: 100%;
+			                 min-height: auto; /* Reset chiều cao trên mobile */
+			                 padding: 15px; /* Giảm padding trên mobile để phù hợp */
+			             }
+			             .btn-group {
+			                 flex-direction: column;
+			                 gap: 15px; /* Tăng khoảng cách giữa các nút trên mobile */
+			             }
+			             .btn-action {
+			                 padding: 6px 15px; /* Giảm padding trên mobile */
+			             }
+			             .btn-add {
+			                 width: 200px; /* Giảm kích thước nút trên mobile */
+			                 padding: 10px; /* Giảm padding trên mobile */
+			             }
+			         }					 #form-container {
+					         max-width: 900px;
+					         margin: 30px auto;
+					         padding: 20px;
+					         background: #fff;
+					         border-radius: 8px;
+					         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+					     }
+					     h1 {
+					         text-align: center;
+					         color: #333;
+					         margin-bottom: 20px;
+					         font-size: 1.8em;
+					     }
+					     .form-group {
+					         margin-bottom: 15px;
+					     }
+					     label {
+					         font-weight: 600;
+					         color: #555;
+					     }
+					     textarea, input, select {
+					         width: 100%;
+					         padding: 8px;
+					         border: 1px solid #ddd;
+					         border-radius: 5px;
+					         font-size: 1em;
+					     }
+					     .answer-row {
+					         display: flex;
+					         align-items: center;
+					         gap: 15px;
+					         margin-bottom: 15px;
+					     }
+					     .btn-submit {
+					         display: block;
+					         width: 200px;
+					         margin: 20px auto;
+					         padding: 10px;
+					         background: #28a745;
+					         color: white;
+					         border: none;
+					         border-radius: 5px;
+					         font-size: 1.1em;
+					     }
+					     .btn-submit:hover {
+					         background: #218838;
+					     }
+					     .message {
+					         text-align: center;
+					         padding: 10px;
+					         margin-bottom: 15px;
+					         border-radius: 5px;
+					         font-size: 1em;
+					     }
+					     .success {
+					         background: #d4edda;
+					         color: #155724;
+					     }
+					     .error {
+					         background: #f8d7da;
+					         color: #721c24;
+					     }
+					     .add-answer-btn {
+					         padding: 8px 15px;
+					         background: #007bff;
+					         color: white;
+					         border: none;
+					         border-radius: 5px;
+					         cursor: pointer;
+					     }
+					     .add-answer-btn:hover {
+					         background: #0056b3;
+					     }
+					     .checkbox-container {
+					         display: flex;
+					         align-items: center;
+					         gap: 5px;
+					     }
+					     .checkbox-container input[type="checkbox"] {
+					         width: auto;
+					     }
+					     .order-display {
+					         width: 50px;
+					         text-align: center;
+					         color: #777;
+					     }	
+						 /* ... (phần CSS khác giữ nguyên) */
+
+						 /* Cards */
+						 .card, .question-card {
+						     border: none;
+						     border-radius: 15px; /* Tăng viền tròn cho card */
+						     padding: 0; /* Xóa padding để tùy chỉnh nội dung bên trong */
+						     background-color: #fff;
+						     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Tăng shadow để nổi bật hơn */
+						     transition: transform 0.3s;
+						     display: flex;
+						     flex-direction: column;
+						     overflow: hidden; /* Đảm bảo nội dung không tràn ra ngoài */
+						 }
+
+						 .card:hover, .question-card:hover {
+						     transform: translateY(-5px);
+						 }
+
+						 .question-card {
+						     margin: 10px;
+						     min-height: 450px; /* Tăng chiều cao tối thiểu để phù hợp với hình ảnh */
+						 }
+
+						 .question-card .card-body {
+						     flex-grow: 1;
+						     padding: 15px; /* Thêm padding cho nội dung bên trong card */
+						     display: flex;
+						     flex-direction: column;
+						     justify-content: space-between;
+						 }
+
+						 .card-img-top {
+						     border-top-left-radius: 15px;
+						     border-top-right-radius: 15px;
+						     height: 200px; /* Giữ chiều cao hình ảnh banner */
+						     object-fit: cover; /* Căn giữa và cắt ảnh nếu cần */
+						     width: 100%;
+						 }
+
+						 .card-title {
+						     font-weight: bold;
+						     font-size: 1.2rem; /* Tăng kích thước tiêu đề để nổi bật */
+						     margin-top: 10px;
+						     margin-bottom: 10px;
+						     color: #333;
+						     display: flex;
+						     align-items: center;
+						 }
+
+						 .card-icon {
+						     font-size: 1.5em; /* Giữ kích thước icon */
+						     color: #007bff; /* Màu xanh dương cho icon */
+						     margin-right: 10px;
+						 }
+
+						 .card-text, .question-type, .score {
+						     margin-bottom: 5px;
+						     color: #666; /* Màu xám cho thông tin bổ sung */
+						     font-size: 0.9rem;
+						 }
+
+						 .question-type, .score {
+						     font-style: italic;
+						 }
+
+						 .answers-list {
+						     margin-top: 10px;
+						     padding-left: 15px;
+						     max-height: 150px;
+						     overflow-y: auto;
+						 }
+
+						 .answer-item {
+						     margin: 5px 0;
+						 }
+
+						 .correct {
+						     color: #28a745; /* Xanh lá cho đáp án đúng */
+						     font-weight: bold;
+						 }
+
+						 .incorrect {
+						     color: #dc3545; /* Đỏ cho đáp án sai */
+						 }
+
+						 /* Buttons */
+						 .btn-group {
+						     margin-top: 15px;
+						     display: flex;
+						     gap: 5px; /* Giảm khoảng cách giữa các nút */
+						 }
+
+						 .btn-action {
+						     padding: 6px 12px; /* Giảm kích thước nút */
+						     border-radius: 20px; /* Viền tròn hơn */
+						     font-size: 0.9rem; /* Giảm kích thước font */
+						 }
+
+						 .btn-delete {
+						     background-color: #dc3545;
+						     color: white;
+						 }
+
+						 .btn-delete:hover {
+						     background-color: #c82333;
+						     color: white;
+						 }
+
+						 .btn-edit {
+						     background-color: #007bff;
+						     color: white;
+						 }
+
+						 .btn-edit:hover {
+						     background-color: #0056b3;
+						     color: white;
+						 }
+
+						 .btn-add {
+						     display: block;
+						     width: 200px;
+						     margin: 20px auto;
+						     padding: 10px;
+						     background-color: #4CAF50;
+						     color: white;
+						     text-align: center;
+						     text-decoration: none;
+						     border-radius: 5px;
+						     font-size: 1.1em;
+						 }
+
+						 .btn-add:hover {
+						     background-color: #45a049;
+						     color: white;
+						 }
+
+						 /* Grid Layouts */
+						 .row-cols-1.row-cols-md-3 {
+						     display: flex;
+						     flex-wrap: wrap;
+						     margin: -1px; /* Giảm khoảng cách ngoài grid để phù hợp với g-1 (2px) */
+						 }
+
+						 .row-cols-1.row-cols-md-3 > .col {
+						     flex: 0 0 33.333333%; /* Giữ 3 cột, mỗi cột 33.33% */
+						     max-width: 33.333333%;
+						     padding: 0 1px; /* Giữ khoảng cách 2px giữa các card */
+						 }
+
+						 @media (max-width: 1200px) {
+						     .row-cols-1.row-cols-md-3 > .col {
+						         flex: 0 0 50%; /* Trên màn hình tablet lớn (≤1200px), hiển thị 2 cột */
+						         max-width: 50%;
+						         padding: 0 1px; /* Giữ khoảng cách 2px */
+						     }
+						     .card-img-top {
+						         height: 180px; /* Giảm chiều cao hình ảnh trên tablet */
+						     }
+						 }
+
+						 @media (max-width: 768px) {
+						     .row-cols-1.row-cols-md-3 > .col {
+						         flex: 0 0 100%; /* Trên màn hình nhỏ (≤768px), hiển thị 1 cột */
+						         max-width: 100%;
+						         padding: 0 1px; /* Giữ khoảng cách 2px */
+						     }
+
+						     .question-card {
+						         padding: 12px; /* Giảm padding trên mobile để phù hợp */
+						         min-height: auto;
+						     }
+
+						     .card-img-top {
+						         height: 150px; /* Giảm chiều cao hình ảnh trên mobile */
+						     }
+
+						     .card-title {
+						         font-size: 1.0rem; /* Giảm kích thước tiêu đề trên mobile */
+						     }
+
+						     .card-text, .question-type, .score {
+						         font-size: 0.8rem; /* Giảm kích thước chữ trên mobile */
+						     }
+
+						     .btn-action {
+						         padding: 5px 10px; /* Giảm kích thước nút trên mobile */
+						         font-size: 0.8rem;
+						     }
+
+						     .btn-add {
+						         width: 180px;
+						         padding: 8px;
+						         font-size: 1.0em;
+						     }
+						 }
+
+						 /* Leaderboard Styles */
+						 						 .top-player {
+						 						   text-align: center;
+						 						   padding: 20px;
+						 						   background: #fff;
+						 						   border-radius: var(--border-radius);
+						 						   box-shadow: var(--box-shadow);
+						 						   position: relative;
+						 						   margin-bottom: 20px;
+						 						 }
+
+						 						 .top-player.first {
+						 						   transform: translateY(-20px);
+						 						   background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+						 						   background-color: #ffd700;
+						 						   transform: scale(1.1);
+						 						 }
+
+						 						 .top-player.second {
+						 						   background: linear-gradient(135deg, #c0c0c0 0%, #e0e0e0 100%);
+						 						   background-color: #c0c0c0;
+						 						 }
+
+						 						 .top-player.third {
+						 						   background: linear-gradient(135deg, #cd7f32 0%, #dfa876 100%);
+						 						   background-color: #cd7f32;
+						 						 }
+
+						 						 .avatar {
+						 						   width: 80px;
+						 						   height: 80px;
+						 						   border-radius: 50%;
+						 						   margin: 10px auto;
+						 						   display: block;
+						 						   border: 3px solid white;
+						 						 }
+
+						 						 .rank {
+						 						   position: absolute;
+						 						   top: -15px;
+						 						   left: 50%;
+						 						   transform: translateX(-50%);
+						 						   width: 30px;
+						 						   height: 30px;
+						 						   border-radius: 50%;
+						 						   background: var(--primary-color);
+						 						   color: white;
+						 						   display: flex;
+						 						   align-items: center;
+						 						   justify-content: center;
+						 						   font-weight: bold;
+						 						   top: -10px;
+						 						   background: var(--secondary-color);
+						 						 }
+
+						 						 /* Enhanced Leaderboard Styles */
+						 						 .leaderboard-card {
+						 						   padding: 30px 20px;
+						 						   border-radius: 20px;
+						 						   position: relative;
+						 						   transition: all 0.3s ease;
+						 						   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+						 						   margin-bottom: 20px;
+						 						 }
+
+						 						 .leaderboard-card.gold {
+						 						   background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+						 						   transform: scale(1.1);
+						 						   z-index: 3;
+						 						 }
+
+						 						 .leaderboard-card.silver {
+						 						   background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+						 						   transform: scale(1.05);
+						 						   z-index: 2;
+						 						 }
+
+						 						 .leaderboard-card.bronze {
+						 						   background: linear-gradient(135deg, #cd7f32 0%, #daa520 100%);
+						 						   transform: scale(1.05);
+						 						   z-index: 1;
+						 						 }
+
+						 						 .leaderboard-card .position {
+						 						   position: absolute;
+						 						   top: -15px;
+						 						   left: 50%;
+						 						   transform: translateX(-50%);
+						 						   width: 40px;
+						 						   height: 40px;
+						 						   border-radius: 50%;
+						 						   background: #fff;
+						 						   display: flex;
+						 						   align-items: center;
+						 						   justify-content: center;
+						 						   font-weight: bold;
+						 						   font-size: 1.2rem;
+						 						   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+						 						 }
+
+						 						 .leaderboard-card .avatar {
+						 						   width: 100px;
+						 						   height: 100px;
+						 						   border-radius: 50%;
+						 						   border: 4px solid #fff;
+						 						   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+						 						   margin: 10px auto 20px;
+						 						   object-fit: cover;
+						 						 }
+
+						 						 .leaderboard-card h5 {
+						 						   color: #2c3e50;
+						 						   font-weight: 600;
+						 						   margin-bottom: 5px;
+						 						 }
+
+						 						 .leaderboard-card p {
+						 						   font-size: 1.2rem;
+						 						   font-weight: 500;
+						 						   color: #2c3e50;
+						 						 }
+
+						 						 .medal-gold,
+						 						 .medal-silver,
+						 						 .medal-bronze {
+						 						   font-size: 2rem;
+						 						   margin-top: 10px;
+						 						 }
+
+						 						 .medal-gold {
+						 						   color: #ffd700;
+						 						 }
+						 						 .medal-silver {
+						 						   color: #c0c0c0;
+						 						 }
+						 						 .medal-bronze {
+						 						   color: #cd7f32;
+						 						 }
+
+						 						 .leaderboard-table {
+						 						   background: #fff;
+						 						   border-radius: 15px;
+						 						   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+						 						   padding: 20px;
+						 						 }
+
+						 						 .leaderboard-table th {
+						 						   background: var(--secondary-color);
+						 						   color: #fff;
+						 						   padding: 15px;
+						 						   font-weight: 500;
+						 						 }
+
+						 						 .leaderboard-table td {
+						 						   padding: 15px;
+						 						   vertical-align: middle;
+						 						 }
+
+						 						 .leaderboard-table tr:hover {
+						 						   background: rgba(52, 152, 219, 0.05);
+						 						 }
+
+						 						 .avatar-sm {
+						 						   width: 40px;
+						 						   height: 40px;
+						 						   border-radius: 50%;
+						 						   margin-right: 10px;
+						 						   object-fit: cover;
+						 						   border: 2px solid var(--primary-color);
+						 						 }
+
+						 						 /* Filter section styling */
+						 						 .filter-section {
+						 						   background: #fff;
+						 						   padding: 20px;
+						 						   border-radius: 15px;
+						 						   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+						 						   margin-bottom: 30px;
+						 						 }
+
+						 						 .form-select {
+						 						   border-radius: 10px;
+						 						   padding: 12px;
+						 						   border: 2px solid #e0e0e0;
+						 						   transition: all 0.3s ease;
+						 						 }
+
+						 						 .form-select:focus {
+						 						   border-color: var(--primary-color);
+						 						   box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+						 						 }		     						

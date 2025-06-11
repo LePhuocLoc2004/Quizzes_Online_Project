@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
+    <title>Admin - User Management - Quiz App</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
+    <link th:href="@{/assets/css/nucleo-icons.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/nucleo-svg.css}" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link id="pagestyle" th:href="@{/assets/css/material-dashboard.css?v=3.2.0}" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <style>
+        /* Đảm bảo body và html chiếm toàn bộ chiều cao */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        /* Đặt main-content để chiếm toàn bộ chiều cao trừ footer */
+        .main-content {
+            min-height: calc(100vh - 60px); /* 60px là chiều cao của footer */
+            position: relative;
+            padding-bottom: 60px; /* Đảm bảo nội dung không bị che bởi footer */
+        }
+
+        .action-btn {
+            margin-right: 8px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        /* Màu cho cột Role */
+        .bg-role-user {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .bg-role-admin {
+            background: linear-gradient(90deg, #9b59b6, #8e44ad);
+            color: white;
+        }
+
+        /* Màu cho cột Id */
+        .bg-id {
+            background: #000000;
+            color: white;
+            width: 20px;
+        }
+
+        /* Màu cho cột Deleted At khi N/A */
+        .bg-deleted-na {
+            background: #9cccff;
+            color: #9cccff;
+            border-radius: 8px;
+        }
+
+        /* Canh giữa tiêu đề cột và định dạng giống Username */
+        th {
+            text-align: center !important;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #344767;
+            text-transform: none;
+            vertical-align: middle; /* Căn giữa theo chiều dọc */
+            padding: 10px; /* Điều chỉnh padding để cân đối */
+        }
+
+        /* Canh giữa nội dung cột và hàng */
+        td {
+            text-align: center; /* Căn giữa theo chiều ngang */
+            vertical-align: middle; /* Căn giữa theo chiều dọc */
+            padding: 10px; /* Điều chỉnh padding để cân đối */
+        }
+
+        /* Định dạng hình ảnh hồ sơ */
+        .profile-image {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block; /* Đảm bảo ảnh căn giữa trong td */
+            margin: 0 auto; /* Căn giữa ảnh theo chiều ngang */
+        }
+
+        /* Định dạng cho phân trang */
+        .pagination-container {
+            position: absolute;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pagination a, .pagination span.page-link {
+            padding: 8px 14px;
+            border: none;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #bdc3c7, #95a5a6);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .pagination a:hover:not(.disabled):not(.active), .pagination span.page-link:hover:not(.disabled):not(.active) {
+            background: linear-gradient(90deg, #a1a9ad, #7d8c91);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .pagination a.active, .pagination span.page-link.active {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .pagination a.disabled, .pagination span.page-link.disabled {
+            background: linear-gradient(90deg, #d3d8db, #b7c0c5);
+            color: #6c757d;
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: 0.6;
+            box-shadow: none;
+        }
+
+        /* Định dạng dấu chấm "..." */
+        .pagination span.ellipsis {
+            padding: 8px 14px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Định dạng cho thông tin phân trang */
+        .pagination-info {
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            z-index: 1000;
+            font-size: 0.9rem;
+            color: #344767;
+        }
+
+        /* Cố định footer ở dưới cùng */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            z-index: 1000;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer .container-fluid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Đặt độ rộng cố định cho cột Role và Active giống Status */
+        .role-column,
+        .active-column {
+            width: 120px; /* Độ rộng cố định cho cột */
+            min-width: 120px; /* Đảm bảo không bị co lại */
+        }
+
+        /* Đảm bảo các badge trong cột Role, Active có độ dài bằng nhau */
+        .badge {
+            display: inline-block;
+            width: 150px; /* Độ rộng cố định cho badge */
+            padding: 0.8em 0.8em; /* Padding để badge trông đẹp hơn */
+            text-align: center; /* Căn giữa nội dung trong badge */
+        }
+
+        .badge-1 {
+            display: inline-block;
+            width: 32px;
+            height: 32px; /* Độ rộng cố định cho badge */
+            text-align: center; /* Căn giữa nội dung trong badge */
+            border-radius: 5px;
+            line-height: 32px; /* Căn giữa nội dung theo chiều dọc trong badge */
+        }
+
+        /* Đánh dấu người dùng mới nhất */
+        .new-user {
+            background-color: rgb(128, 255, 128); /* Màu xanh nhạt để nổi bật */
+        }
+
+        /* Đảm bảo các phần tử trong td được căn giữa */
+        h6, p, span {
+            margin: 0; /* Loại bỏ margin mặc định để căn giữa chính xác */
+        }
+    </style>
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2 bg-white my-2"
+        id="sidenav-main">
+        <div class="sidenav-header">
+            <a class="navbar-brand px-4 py-3 m-0" th:href="@{/admin/dashboard}">
+                <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img" width="26" height="26"
+                    alt="main_logo">
+                <span class="ms-1 text-sm text-dark">Quiz Admin</span>
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0 mb-2">
+        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" th:href="@{/admin/dashboard}">
+                        <i class="material-symbols-rounded opacity-5">dashboard</i>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active bg-gradient-dark text-white" th:href="@{/admin/adminUser}">
+                        <i class="material-symbols-rounded opacity-5">person</i>
+                        <span class="nav-link-text ms-1">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" th:href="@{/admin/quizzes}">
+                        <i class="material-symbols-rounded opacity-5">quiz</i>
+                        <span class="nav-link-text ms-1">Quizzes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" th:href="@{/admin/categories}">
+                        <i class="material-symbols-rounded opacity-5">category</i>
+                        <span class="nav-link-text ms-1">Categories</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" th:href="@{/admin/logout}">
+                        <i class="material-symbols-rounded opacity-5">logout</i>
+                        <span class="nav-link-text ms-1">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" th:href="@{/admin}">Admin</a>
+                        </li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Users</li>
+                    </ol>
+                </nav>
+            </div>
+        </nav>
+
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="ms-3">
+                    <h3 class="mb-0 h4 font-weight-bolder">User Management</h3>
+                    <p class="mb-4">Manage users and their rankings.</p>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <a th:href="@{/admin/users/add}" class="btn bg-gradient-dark mb-0">
+                        <i class="material-symbols-rounded">add</i> Add New User
+                    </a>
+                </div>
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h6>All Users</h6>
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive">
+                                <table class="table align-items-center mb-0" id="user-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Profile Image</th>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th class="role-column">Role</th>
+                                            <th class="active-column">Active</th>
+                                            <th>Created At</th>
+                                            <th>Deleted At</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="user-table-body">
+                                        <tr th:each="user : ${users}"
+                                            th:if="${users != null and #lists.size(users) > 0}"
+                                            th:classappend="${user.userId == newestUserId ? 'new-user' : ''}">
+                                            <td>
+                                                <span class="badge-1 badge-sm bg-id"
+                                                    th:text="${user.userId ?: 'N/A'}">N/A</span>
+                                            </td>
+                                            <td>
+                                                <img th:if="${user.profileImage != null}"
+                                                    th:src="@{'/assets/img/' + ${user.profileImage}}"
+                                                    class="profile-image" alt="Profile Image" />
+                                                <span th:unless="${user.profileImage != null}"
+                                                    class="text-xs font-weight-bold">No Image</span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-0 text-sm" th:text="${user.username ?: 'N/A'}">N/A</h6>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0"
+                                                    th:text="${user.email ?: 'N/A'}">N/A</p>
+                                            </td>
+                                            <td class="role-column">
+                                                <span class="badge badge-sm"
+                                                    th:classappend="${user.role == 'ROLE_USER' ? 'bg-role-user' : 'bg-role-admin'}"
+                                                    th:text="${user.role ?: 'N/A'}">N/A</span>
+                                            </td>
+                                            <td class="active-column">
+                                                <span class="badge badge-sm"
+                                                    th:classappend="${user.isActive ? 'bg-gradient-success' : 'bg-gradient-secondary'}"
+                                                    th:text="${user.isActive ? 'Activated' : 'Not Activated'}">N/A</span>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0"
+                                                    th:text="${#dates.format(user.createdAt, 'dd/MM/yyyy') ?: 'N/A'}">
+                                                    N/A</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0"
+                                                    th:classappend="${user.deletedAt == null ? 'bg-deleted-na' : ''}"
+                                                    th:text="${user.deletedAt != null ? #dates.format(user.deletedAt, 'dd/MM/yyyy') : 'N/A'}">
+                                                    N/A</p>
+                                            </td>
+                                            <td>
+                                                <a th:href="@{/admin/users/edit(userId=${user.userId})}"
+                                                    class="btn btn-sm btn-info action-btn">
+                                                    <i class="material-symbols-rounded">edit</i> Edit
+                                                </a>
+                                                <form th:action="@{/admin/users/delete}" th:method="post"
+                                                    style="display:inline;" class="action-form">
+                                                    <input type="hidden" name="userId" th:value="${user.userId}">
+                                                    <button type="submit" class="btn btn-sm btn-danger action-btn">
+                                                        <i class="material-symbols-rounded">delete</i> Delete
+                                                    </button>
+                                                </form>
+                                                <form
+                                                    th:action="${user.isActive ? '/admin/users/deactivate' : '/admin/users/activate'}"
+                                                    th:method="post" style="display:inline;" class="action-form">
+                                                    <input type="hidden" name="userId" th:value="${user.userId}">
+                                                    <button type="submit" class="btn btn-sm action-btn"
+                                                        th:classappend="${user.isActive ? 'btn-warning' : 'btn-success'}">
+                                                        <i class="material-symbols-rounded"
+                                                            th:text="${user.isActive ? 'lock' : 'lock_open'}"></i>
+                                                        <span
+                                                            th:text="${user.isActive ? 'Deactivate' : 'Activate'}"></span>
+                                                    </button>
+                                                </form>
+                                                <a th:href="@{/admin/users/details(userId=${user.userId})}"
+                                                    class="btn btn-sm btn-primary action-btn">
+                                                    <i class="material-symbols-rounded">visibility</i> Details
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr th:unless="${users != null and #lists.size(users) > 0}">
+                                            <td colspan="9" class="text-center">No users available</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hiển thị thông tin phân trang -->
+            <div class="pagination-info" id="pagination-info" th:if="${totalUsers > 0}">
+                <p>
+                    Showing <span th:text="${(currentPage - 1) * pageSize + 1}"></span> to
+                    <span th:text="${(currentPage * pageSize) > totalUsers ? totalUsers : (currentPage * pageSize)}"></span>
+                    of <span th:text="${totalUsers}"></span> users
+                </p>
+            </div>
+
+            <!-- Phân trang -->
+            <div class="pagination-container" id="pagination-container" th:if="${totalPages > 1}">
+                <div class="pagination" id="pagination">
+                    <!-- Nút Previous -->
+                    <span class="page-link"
+                        th:classappend="${currentPage == 1 ? 'disabled' : ''}"
+                        th:attr="onclick=${currentPage == 1 ? '' : 'goToPage(' + (currentPage - 1) + ')'}"
+                        th:text="'Previous'"></span>
+
+                    <!-- Tính toán khoảng trang hiển thị -->
+                    <th:block th:with="maxPagesToShow=5, startPage=${currentPage - (currentPage - 1) % maxPagesToShow}, endPage=${startPage + maxPagesToShow - 1 > totalPages ? totalPages : startPage + maxPagesToShow - 1}, startPageAdjusted=${endPage == totalPages ? (totalPages - maxPagesToShow + 1 > 0 ? totalPages - maxPagesToShow + 1 : 1) : startPage}">
+                        <!-- Hiển thị trang đầu tiên nếu không nằm trong khoảng hiển thị -->
+                        <th:block th:if="${startPageAdjusted > 1}">
+                            <span class="page-link" th:attr="onclick='goToPage(1)'" th:text="1"></span>
+                            <span th:if="${startPageAdjusted > 2}" class="ellipsis">...</span>
+                        </th:block>
+
+                        <!-- Hiển thị các trang trong khoảng -->
+                        <th:block th:each="i : ${#numbers.sequence(startPageAdjusted, endPage)}">
+                            <span class="page-link"
+                                th:classappend="${i == currentPage ? 'active' : ''}"
+                                th:attr="onclick='goToPage(' + ${i} + ')'"
+                                th:text="${i}"></span>
+                        </th:block>
+
+                        <!-- Hiển thị trang cuối cùng nếu không nằm trong khoảng hiển thị -->
+                        <th:block th:if="${endPage < totalPages}">
+                            <span th:if="${endPage < totalPages - 1}" class="ellipsis">...</span>
+                            <span class="page-link" th:attr="onclick='goToPage(' + ${totalPages} + ')'" th:text="${totalPages}"></span>
+                        </th:block>
+                    </th:block>
+
+                    <!-- Nút Next -->
+                    <span class="page-link"
+                        th:classappend="${currentPage == totalPages ? 'disabled' : ''}"
+                        th:attr="onclick=${currentPage == totalPages ? '' : 'goToPage(' + (currentPage + 1) + ')'}"
+                        th:text="'Next'"></span>
+                </div>
+            </div>
+
+            <!-- Footer cố định ở dưới cùng -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="copyright text-center text-sm text-muted">
+                        © <script>document.write(new Date().getFullYear())</script>,
+                        Quiz App Admin Panel
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <!-- Thêm jQuery để hỗ trợ AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:inline="javascript">
+        // Biến lưu trữ trang hiện tại
+        var currentPage = /*[[${currentPage}]]*/ 1;
+
+        // Hàm để chuyển trang bằng AJAX
+        function goToPage(page) {
+            $.ajax({
+                url: '/admin/adminUser?page=' + page,
+                type: 'GET',
+                success: function(response) {
+                    // Parse HTML response để lấy nội dung bảng và phân trang
+                    var newDocument = new DOMParser().parseFromString(response, 'text/html');
+                    var newTableBody = newDocument.querySelector('#user-table-body').innerHTML;
+                    var newPagination = newDocument.querySelector('#pagination').innerHTML;
+                    var newPaginationInfo = newDocument.querySelector('#pagination-info').innerHTML;
+
+                    // Cập nhật bảng người dùng
+                    $('#user-table-body').html(newTableBody);
+
+                    // Cập nhật phân trang
+                    $('#pagination').html(newPagination);
+
+                    // Cập nhật thông tin phân trang
+                    $('#pagination-info').html(newPaginationInfo);
+
+                    // Cập nhật giá trị currentPage
+                    currentPage = page;
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error loading page:', error);
+                }
+            });
+        }
+
+        // Ngăn chặn hành vi mặc định của form để giữ AJAX
+        $(document).on('submit', '.action-form', function(e) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định của form
+            var form = $(this);
+            var action = form.attr('action');
+            var method = form.attr('method');
+            var data = form.serialize();
+
+            $.ajax({
+                url: action,
+                type: method,
+                data: data,
+                success: function(response) {
+                    // Tải lại trang hiện tại bằng AJAX
+                    goToPage(currentPage);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error submitting form:', error);
+                }
+            });
+
+            return false; // Ngăn chặn submit form làm mới trang
+        });
+    </script>
+
+    <script th:src="@{/assets/js/core/popper.min.js}"></script>
+    <script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/js/plugins/perfect-scrollbar.min.js}"></script>
+    <script th:src="@{/assets/js/plugins/smooth-scrollbar.min.js}"></script>
+    <script th:src="@{/assets/js/material-dashboard.min.js?v=3.2.0}"></script>
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+{
+  "quizzId": 3,
+  "title": "Basic Algebra",
+  "description": "Algebraic expressions and equations",
+  "timeLimit": 20,
+  "totalScore": 70,
+  "status": "PUBLISHED",
+  "questions": [
+    {
+      "questionId": 19,
+      "questionText": "What is the value of x in 2x + 3 = 7?",
+      "questionType": "SINGLE_CHOICE",
+      "score": 10,
+      "orderIndex": 1,
+      "answers": [
+        {
+          "answerId": 61,
+          "answerText": "2",
+          "isCorrect": true
+        },
+        {
+          "answerId": 62,
+          "answerText": "3",
+          "isCorrect": false
+        },
+        {
+          "answerId": 63,
+          "answerText": "4",
+          "isCorrect": false
+        },
+        {
+          "answerId": 64,
+          "answerText": "5",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 20,
+      "questionText": "Select all expressions that equal 10:",
+      "questionType": "MULTIPLE_CHOICE",
+      "score": 10,
+      "orderIndex": 2,
+      "answers": [
+        {
+          "answerId": 65,
+          "answerText": "5 + 5",
+          "isCorrect": true
+        },
+        {
+          "answerId": 66,
+          "answerText": "2 * 5",
+          "isCorrect": true
+        },
+        {
+          "answerId": 67,
+          "answerText": "15 - 5",
+          "isCorrect": true
+        },
+        {
+          "answerId": 68,
+          "answerText": "3 * 4",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 21,
+      "questionText": "Is -(-2) equal to 2?",
+      "questionType": "TRUE_FALSE",
+      "score": 10,
+      "orderIndex": 3,
+      "answers": [
+        {
+          "answerId": 69,
+          "answerText": "True",
+          "isCorrect": true
+        },
+        {
+          "answerId": 70,
+          "answerText": "False",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 22,
+      "questionText": "Solve for x: 3x - 4 = 8",
+      "questionType": "SINGLE_CHOICE",
+      "score": 10,
+      "orderIndex": 4,
+      "answers": [
+        {
+          "answerId": 71,
+          "answerText": "4",
+          "isCorrect": true
+        },
+        {
+          "answerId": 72,
+          "answerText": "3",
+          "isCorrect": false
+        },
+        {
+          "answerId": 73,
+          "answerText": "5",
+          "isCorrect": false
+        },
+        {
+          "answerId": 74,
+          "answerText": "6",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 23,
+      "questionText": "Which of these are quadratic equations?",
+      "questionType": "MULTIPLE_CHOICE",
+      "score": 10,
+      "orderIndex": 5,
+      "answers": [
+        {
+          "answerId": 75,
+          "answerText": "x² + 2x + 1",
+          "isCorrect": true
+        },
+        {
+          "answerId": 76,
+          "answerText": "2x² - 3x + 4",
+          "isCorrect": true
+        },
+        {
+          "answerId": 77,
+          "answerText": "3x + 2",
+          "isCorrect": false
+        },
+        {
+          "answerId": 78,
+          "answerText": "5x³ + 2x² + 1",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "questionId": 24,
+      "questionText": "Is the square root of a negative number a real number?",
+      "questionType": "TRUE_FALSE",
+      "score": 10,
+      "orderIndex": 6,
+      "answers": [
+        {
+          "answerId": 79,
+          "answerText": "True",
+          "isCorrect": false
+        },
+        {
+          "answerId": 80,
+          "answerText": "False",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "questionId": 25,
+      "questionText": "What is the value of x² when x = 3?",
+      "questionType": "SINGLE_CHOICE",
+      "score": 10,
+      "orderIndex": 7,
+      "answers": [
+        {
+          "answerId": 81,
+          "answerText": "9",
+          "isCorrect": true
+        },
+        {
+          "answerId": 82,
+          "answerText": "6",
+          "isCorrect": false
+        },
+        {
+          "answerId": 83,
+          "answerText": "3",
+          "isCorrect": false
+        },
+        {
+          "answerId": 84,
+          "answerText": "12",
+          "isCorrect": false
+        }
+      ]
+    }
+  ]
+}

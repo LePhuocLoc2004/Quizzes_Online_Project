@@ -1,0 +1,433 @@
+<mxfile host="65bd71144e">
+    <diagram name="Quiz Flow" id="quiz-flow-diagram">
+        <mxGraphModel dx="816" dy="779" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="0" fold="1" page="0" pageScale="1" pageWidth="2000" pageHeight="3000" background="#BABABA" math="1" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="node_start" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Start&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="824.5" y="241" width="189" height="88" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_auth" value="Authenticated?" style="rhombus;whiteSpace=wrap;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="847" y="429" width="144" height="96" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_login" value="Login/Register" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="597" y="441" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_validate" value="Validation" style="rhombus;whiteSpace=wrap;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="477" y="331" width="132" height="96" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_main_menu" value="Main Menu" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="847" y="643" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_create_quiz" value="Create Quiz" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="847" y="758" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_quiz_info" value="Enter Quiz Info" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="847" y="892" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_add_questions" value="Add Questions" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="847" y="1025" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_question_type" value="Question Type" style="rhombus;whiteSpace=wrap;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="853" y="1153" width="132" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_single_choice" value="Single Choice" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="545" y="973" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_multi_choice" value="Multiple Choice" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="545" y="1057" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_true_false" value="True/False" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="545" y="1144" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_config_q" value="Configure Question" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="545" y="1277" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_add_more" value="Add More?" style="rhombus;whiteSpace=wrap;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="855" y="1322" width="132" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_quiz_settings" value="Quiz Settings" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="545" y="1451" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_set_time" value="Set Time Limit" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="544" y="1573" width="145" height="71" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_set_score" value="Set Scoring" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="731" y="1572.5" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_set_access" value="Set Access Rights" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="917" y="1572" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_publish_quiz" value="Publish Quiz" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1103" y="1572" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_take_quiz" value="Take Quiz" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1174" y="778" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_browse_quiz" value="Browse Quizzes" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1174" y="892" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_quiz_details" value="Quiz Details" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1174" y="1003" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_check_access" value="Check Access" style="rhombus;whiteSpace=wrap;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1376" y="979" width="132" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_start_quiz" value="Start Quiz" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1174" y="1114" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_timer" value="Start Timer" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1174" y="1225" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_show_question" value="Display Question" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1174" y="1336" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_answer" value="Answer" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1174" y="1447" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_next_q" value="More Questions?" style="rhombus;whiteSpace=wrap;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1411" y="1316" width="132" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_submit" value="Submit Quiz" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1405" y="1201" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_calculate" value="Calculate Score" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1577" y="1201" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_show_result" value="Show Results" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1577" y="1102" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_history" value="Quiz History" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1360" y="786" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_view_attempts" value="View Attempts" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1543" y="756" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_attempt_detail" value="Attempt Details" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1543" y="852" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_analysis" value="Result Analysis" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1543" y="947" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_profile" value="Profile Management" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="671" y="758" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_edit_profile" value="Edit Profile" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="433" y="758.5" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_change_password" value="Change Password" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="433" y="667.5" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_view_stats" value="View Statistics" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="433" y="848.5" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_admin" value="Is Admin?" style="rhombus;whiteSpace=wrap;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1068" y="431" width="120" height="96" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_admin_panel" value="Admin Panel" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1288" y="443" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_manage_users" value="User Management" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1489" y="443" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_manage_quizzes" value="Quiz Management" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1489" y="529" width="144" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_view_reports" value="View Reports" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1489" y="353" width="144" height="76" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_start" target="node_auth" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge2" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_auth" target="node_login" edge="1">
+                    <mxGeometry x="-0.2037" y="-11" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge3" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_auth" target="node_main_menu" edge="1">
+                    <mxGeometry x="0.0167" y="-11" relative="1" as="geometry">
+                        <mxPoint y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_login" target="node_validate" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="664" y="357"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge5" value="Failed" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_validate" target="node_login" edge="1">
+                    <mxGeometry x="-0.5195" y="-23" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="515" y="477"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge6" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_main_menu" target="node_create_quiz" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge7" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_main_menu" target="node_take_quiz" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge8" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_main_menu" target="node_history" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge9" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_main_menu" target="node_profile" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="752" y="679"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge10" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_create_quiz" target="node_quiz_info" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1068" y="1106" as="sourcePoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge11" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_quiz_info" target="node_add_questions" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge12" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_add_questions" target="node_question_type" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge13" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_question_type" target="node_single_choice" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="884" y="1213" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="817" y="1213"/>
+                            <mxPoint x="817" y="1024"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge14" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_question_type" target="node_multi_choice" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="884" y="1213" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="817" y="1213"/>
+                            <mxPoint x="817" y="1093"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge15" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_question_type" target="node_true_false" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="884" y="1213" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="818" y="1213"/>
+                            <mxPoint x="818" y="1157"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge16" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_single_choice" target="node_config_q" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="494" y="1009"/>
+                            <mxPoint x="494" y="1317"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge17" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_multi_choice" target="node_config_q" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="494" y="1093"/>
+                            <mxPoint x="494" y="1317"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge18" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=-0.014;exitY=0.611;exitDx=0;exitDy=0;exitPerimeter=0;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_true_false" target="node_config_q" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="494" y="1188"/>
+                            <mxPoint x="494" y="1317"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge19" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_config_q" target="node_add_more" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="617" y="1382"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge20" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_add_more" target="node_add_questions" edge="1">
+                    <mxGeometry x="-0.8938" y="15" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1042" y="1382"/>
+                            <mxPoint x="1042" y="1055"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge21" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_add_more" target="node_quiz_settings" edge="1">
+                    <mxGeometry x="0.2274" y="-8" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="921" y="1487"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge22" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;rounded=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_quiz_settings" target="node_set_time" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="617" y="1554"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge23" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_set_time" target="node_set_score" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge24" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_set_score" target="node_set_access" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge25" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_set_access" target="node_publish_quiz" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge26" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_take_quiz" target="node_browse_quiz" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge27" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_browse_quiz" target="node_quiz_details" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge28" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_quiz_details" target="node_check_access" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge29" value="Denied" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_check_access" target="node_browse_quiz" edge="1">
+                    <mxGeometry x="0.4138" y="12" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1442" y="933"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge30" value="Granted" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_check_access" target="node_start_quiz" edge="1">
+                    <mxGeometry x="0.4096" y="-9" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1442" y="1150"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge31" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_start_quiz" target="node_timer" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge32" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_timer" target="node_show_question" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge33" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_show_question" target="node_answer" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge34" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_answer" target="node_next_q" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge35" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_next_q" target="node_show_question" edge="1">
+                    <mxGeometry x="-0.0538" y="-10" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1534" y="1372"/>
+                            <mxPoint x="1534" y="1372"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge36" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_next_q" target="node_submit" edge="1">
+                    <mxGeometry x="0.0233" y="-14" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge37" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_submit" target="node_calculate" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge38" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_calculate" target="node_show_result" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge39" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_history" target="node_view_attempts" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1493" y="866.5" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="1527" y="822"/>
+                            <mxPoint x="1527" y="726"/>
+                            <mxPoint x="1613" y="726"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge40" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_view_attempts" target="node_attempt_detail" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge41" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_attempt_detail" target="node_analysis" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge42" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_profile" target="node_edit_profile" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge43" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_profile" target="node_change_password" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="645" y="794"/>
+                            <mxPoint x="645" y="707"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge44" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_profile" target="node_view_stats" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="645" y="794"/>
+                            <mxPoint x="645" y="889"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge45" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_main_menu" target="node_admin" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge46" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_admin" target="node_admin_panel" edge="1">
+                    <mxGeometry x="-0.4" y="12" relative="1" as="geometry">
+                        <Array as="points"/>
+                        <mxPoint as="offset"/>
+                        <mxPoint x="1187" y="481" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge47" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_admin_panel" target="node_manage_users" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1594" y="607" as="sourcePoint"/>
+                        <mxPoint x="1795" y="592" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1504" y="479"/>
+                            <mxPoint x="1504" y="479"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge48" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_admin_panel" target="node_manage_quizzes" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1593" y="785" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1457" y="479"/>
+                            <mxPoint x="1457" y="565"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge49" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_admin_panel" target="node_view_reports" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1645" y="690" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="1459" y="479"/>
+                            <mxPoint x="1459" y="404"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fillColor=#dae8fc;fontColor=#000000;labelBackgroundColor=none;" parent="1" source="node_admin" target="node_main_menu" edge="1">
+                    <mxGeometry x="-0.8339" y="-12" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                        <mxPoint x="1082" y="591" as="sourcePoint"/>
+                        <mxPoint x="974" y="591" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1018" y="479"/>
+                            <mxPoint x="1018" y="564"/>
+                            <mxPoint x="955" y="564"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
